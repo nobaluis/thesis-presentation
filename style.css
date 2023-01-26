@@ -1,0 +1,151 @@
+@font-face {
+    font-family: "NType82";
+    src: url("fonts/NType82-Regular.otf");
+}
+
+@font-face {
+    font-family: "NType82Mono";
+    src: url("fonts/NType82Mono-Regular.otf");
+}
+
+.column {
+  flex: 33.33%;
+  height: 200px;
+  padding: 10px;
+  margin: 5px;
+  text-align: center;
+}
+
+.container {
+   display: flex;
+}	
+
+/* general text */
+slides > slide {
+  color: #212121;
+  font-family: "NType82Mono";
+  line-height: 1.25;
+  letter-spacing: 0.8px;
+}
+
+/* title */
+.title-slide hgroup h1 {
+  font-family: "NType82";
+  font-size: 48px;
+  line-height: 1.34;
+  letter-spacing: 0.8px;
+  color: #009E93;
+}
+
+.title-slide hgroup h2 {
+  color: #009E93;
+}
+
+.title-slide hgroup p {
+  font-family: "NType82Mono";
+  font-size: 24px;
+  line-height: 1.34;
+  letter-spacing: -1px;
+  color: #FFF;
+}
+
+
+/* sections */
+slides > slide.dark {
+    background: #FAFAFA !important;
+}
+
+.segue h2 {
+    color: #424242;
+    font-family: "NType82";
+    line-height: 1.34;
+    letter-spacing: 0.8px;
+    font-size: 40px;
+}
+
+/* disable slide numbers */
+slides > slide:not(.nobackground):after {
+    content: '';
+}
+
+/* uncomment for blue bold
+b {
+  color: #009E93;
+}
+
+
+h1, h2, h3 {
+  font-weight: 400;
+}
+*/
+
+/* line 280, ../scss/default.scss */
+h2 {
+  font-family: "NType82";
+  font-size: 30px;
+  letter-spacing: 1px;
+  line-height: 1.34;
+  font-weight: 600;
+  color: #009E93;
+}
+
+/* line 287, ../scss/default.scss
+h3 {
+  font-size: 30px;
+  letter-spacing: -1px;
+  line-height: 1;
+  font-weight: inherit;
+  color: #009E93;
+}
+*/
+ 
+strong {
+  color: #009E93;
+}
+
+/* previous EJW edit for color
+h2 {
+  color: #009E93;
+}
+
+h3 {
+  color: #009E93;
+}
+*/
+
+table.rmdtable tr > td:first-child, table th {
+  color: #000;
+}
+
+table.rmdtable td.highlight {
+  color: #000;
+}
+
+table.rmdtable th {
+  background: #009E93;
+}
+
+aside.gdbar {
+  height: 120px !important;
+  width: 95% !important;
+  top: 497px !important;
+  background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #009E93), color-stop(100%, #FFF)) no-repeat !important;
+  background: -webkit-linear-gradient(left, #009E93, #FFF) no-repeat !important;
+  background: -moz-linear-gradient(left, #009E93, #FFF) no-repeat !important;
+  background: -o-linear-gradient(left, #009E93, #FFF) no-repeat !important;
+  background: linear-gradient(left, #009E93, #FFF) no-repeat !important;
+}
+
+aside.gdbar img {
+  width: 360px !important;
+  height: 120px !important;
+  position: absolute; 
+  margin: 0px 0px;
+}
+
+/* Addition by EJW to size logo on content slides */
+slides > slide:not(.nobackground):before {
+  width: 150px;
+  height: 50px;
+  background-size: 150px 50px;
+}

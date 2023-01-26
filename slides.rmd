@@ -1,0 +1,214 @@
+---
+title: "End-to-End Deep Reinforcement Learning para el seguimiento de trayectorias sobre superficies tridimensionales"
+author: "<b>Autor</b>: Luis Alberto Castillo Barrientos<br><b>Director de tesis</b>: Dr. Reyes Rios Cabrera"
+date: "3 de febrero del 2023"
+output: 
+  ioslides_presentation:
+    css: style.css
+    logo: images/logo.png
+    widescreen: true
+    transition: 0.0
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Introducción
+
+## Motivacion {.flexbox .vcenter}
+
+<div class="columns-2">
+  <video width="100%" autoplay loop>
+  <source src="videos/alphazero_2017_final.m4v" type="video/mp4"/>
+  </video>
+  <div align="center">
+  Silver, David, et al. "Mastering the game of go without human knowledge." (2017).
+  </div>
+  
+  <video width="100%" autoplay loop>
+  <source src="videos/openai_five_dota_final.m4v" type="video/mp4"/>
+  </video>
+  <div align="center">
+  Berner, Christopher, et al. "Dota 2 with large scale deep reinforcement learning." (2019).
+  </div>
+</div>
+
+## Aprendizaje por refuerzo {.flexbox .vcenter}
+
+<div align="center">
+  ![](images/rl-model.png)
+</div>
+
+
+## DRL aplicado a la robotica {.flexbox .vcenter}
+
+<div class="columns-2">
+  <video width="100%" autoplay loop>
+  <source src="videos/shadow_hand_real_block_final.m4v" type="video/mp4"/>
+  </video>
+  <div align="center">
+  Andrychowicz, OpenAI: Marcin, et al. "Learning dexterous in-hand manipulation." (2020).
+  </div>
+  
+  <video width="100%" autoplay loop>
+  <source src="videos/shadow_rubik_normal.m4v" type="video/mp4"/>
+  </video>
+  <div align="center">
+  Akkaya, Ilge, et al. "Solving rubik's cube with a robot hand." (2019).
+  </div>
+</div>
+
+
+## Planteamiento del problema {.flexbox .vcenter}
+
+<div class="columns-2">
+  Algunas de las complicaciones de aplicar directamente DRL a robots reales son:<br><br>
+  <ul>
+  <li>Ineficiencia de muestreo</li>
+  <li>Riesgo de seguridad</li>
+  <li>Es dificil reiniciar el entorno</li>
+  </ul>
+  
+  <img src="images/robot-safety-zone.jpg" width="100%">
+</div>
+
+## Aprendiendo en simulacion {.flexbox .vcenter}
+
+<div class="columns-2">
+  <video width="100%" autoplay loop>
+  <source src="videos/openai_rubik.m4v" type="video/mp4"/>
+  </video>
+  
+  <img src="images/open-rubik-overview.jpg" width="100%">
+</div>
+
+## Tiempo de entrenamiento en DRL en simulacion {.flexbox .vcenter}
+
+<div align="center">
+  <img src="images/training-time.png" width="90%">
+</div>
+
+## Estado del arte {.flexbox .vcenter}
+
++-----------+---------+----------------+---------+---------+---------+-----------+
+| Simulator | Physics | Photorealistic | DR      | ROS     | GPU     | Multi-GPU |
++===========+:=======:+:==============:+:=======:+:=======:+:=======:+:=========:+
+| Gazebo    | ✅       | ❌              | ❌       | ✅       | ✅       | ❌         |
++-----------+---------+----------------+---------+---------+---------+-----------+
+| Pybullet  | ✅       | ❌              | ❌       | ❌       | ✅       | ❌         |
++-----------+---------+----------------+---------+---------+---------+-----------+
+| MuJoCo    | ✅       | ❌              | ❌       | ❌       | ❌       | ❌         |
++-----------+---------+----------------+---------+---------+---------+-----------+
+| Unity     | ❌       | ✅              | ❌       | ❌       | ✅       | ❌         |
++-----------+---------+----------------+---------+---------+---------+-----------+
+| Isaac Sim | ✅       | ✅              | ✅       | ✅       | ✅       | ✅         |
++-----------+---------+----------------+---------+---------+---------+-----------+
+
+## Isaac Gym {.flexbox .vcenter}
+
+<div class="columns-2">
+  <video width="100%" autoplay loop>
+  <source src="videos/isaac-gym-demo-01.m4v" type="video/mp4"/>
+  </video>
+  <video width="100%" autoplay loop>
+  <source src="videos/isaac-gym-demo-03.m4v" type="video/mp4"/>
+  </video>
+
+  <img src="images/rl-compute-time-comparative.png" width="100%">
+</div>
+
+## Hipótesis {.flexbox .vcenter}
+
+"Es posible generar una política de control optimizada para la solución de una tarea de seguimiento de trayectorias sobre superficies tridimensionales usando un robot manipulador, mediante un ambiente de simulación física realista que provea las observaciones necesarias para el entrenamiento, empleando una combinación de técnicas de control tradicionales y algoritmos de DRL de forma eficiente, reduciendo el número de interacciones del agente y los recursos computacionales durante el entrenamiento"
+
+## Objetivos {.flexbox .vcenter}
+
+- Realizar una comparación entre los simuladores robóticos y un estudio de compatibilidad con los frameworks de ML.
+- Proponer una arquitectura experimental que permita generar las observaciones necesarias para el entrenamiento de un agente que permita resolver la tarea asignada.
+- Hacer una comparación del rendimiento de entrenamiento, utilizando la metodología propuesta, variando los parámetros de simulación para la tarea propuesta.
+
+## Contribución del proyecto {.flexbox .vcenter}
+
+1. Desarrollo de una metodología de entrenamiento de modelos de DRL para resolver tareas de seguimiento de trayectorias en superficies tridimensionales de forma end-to-end.
+2. Una política capaz de inferir de la fuerza aplicada a los motores a partir de solo las imágenes de un sensor RGBD ubicado en el efector final del robot.
+4. Proposición de una arquitectura de entrenamiento que implementa un simulador robótico de vanguardia y un framework de DL de alto rendimiento de manera eficiente.
+5. Reducción del tiempo y los recursos computacionales requeridos para el entrenamiento de modelos de DRL.
+
+## Aplicaciones {.flexbox .vcenter}
+
+<div class="columns-2">
+  Aplicación directa de las politicas a la automatización de procesos industriales con robots:<br><br>
+  <ul>
+  <li>Soldadura</li>
+  <li>Pintura</li>
+  <li>Aplicación de aditivos</li>
+  <li>Manufactura aditiva</li>
+  </ul>
+  
+  <img src="images/welding-robot.jpg" width="80%">
+  <img src="images/painting-robot.jpg" width="80%">
+</div>
+
+
+# Metodología
+
+## Arquitectura del sistema de aprendizaje {.flexbox .vcenter}
+
+<div align="center">
+  <img src="images/system-design.jpg" width="90%">
+</div>
+
+## Generador de datos sintéticos de entrenamiento {.flexbox .vcenter}
+
+TODO
+
+## Aprendizaje por refuerzo {.flexbox .vcenter}
+
+TODO
+
+## Arquitectura de red neuronal {.flexbox .vcenter}
+ 
+<div align="center">
+  <img src="images/nn-arch.png" width="90%">
+</div>
+
+## Algoritmo de entrenamiento {.flexbox .vcenter}
+
+TODO
+
+# Resultados
+
+## Desempeno de la politica {.flexbox .vcenter}
+
+<div align="center">
+  <img src="images/results-error.png" width="80%">
+</div>
+
+## Resultados de entrenamiento {.flexbox .vcenter}
+
+<div align="center">
+  <img src="images/results-envs.png" width="90%">
+</div>
+
+## Demo {.flexbox .vcenter}
+
+<div align="center">
+  <video width="75%" autoplay loop>
+  <source src="videos/best-policy-demo-full.m4v" type="video/mp4">
+  </video>
+</div>
+
+# Conclusiones y trabajo futuro
+
+## Conclusiones {.flexbox .vcenter}
+
+- Este trabajo propone metodología para resolver el problema de seguimiento de trayectoria en superficies tridimensionales de forma end-to-end, mediante una combinación de algoritmos de DRL y tecnicas de control tradicionales.
+- La política generada tiene una tasa de éxito del 96% y un error en la posición de $\pm$ 0.01 metros.
+- Se logro reducir en 30% el tiempo de entrenamiento mediante la paralelizacion de 512 ambiente en una sola GPU Nvidia 3070.
+- Este trabajo es pionero en resolver tareas de manipulación guiadas con visión en la plataforma de investigación de RL de Isaac Gym y podría habilitar el desarrollo de trabajos futuros en el área de DRL y visión por computadora.
+
+## Trabajo futuro {.flexbox .vcenter}
+
+- Ampliar el estudio a otros agentes manipuladores y el desarrollo de políticas de control generalizadas. 
+- Transferir la politica aprendida en simulacion a agentes reales (i.e., sim2real) mendiante el uso de tecnicas de Domain Randomization.
+- Ampliar el alcance de la tarea a cualquier objeto 3D arbitrario.
