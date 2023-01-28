@@ -33,12 +33,17 @@ knitr::opts_chunk$set(echo = FALSE)
   </div>
 </div>
 
-## Aprendizaje por refuerzo {.flexbox .vcenter}
+## Aprendizaje por refuerzo (RL) {.flexbox .vcenter}
 
 <div align="center">
   <img src="images/rl-model.png" width="100%">
 </div>
 
+## Aprendizaje por refuerzo profundo (DRL) {.flexbox .vcenter}
+
+<div align="center">
+  <img src="images/rl-algos.png" width="100%">
+</div>
 
 ## DRL aplicado a la robótica {.flexbox .vcenter}
 
@@ -216,23 +221,27 @@ $$
 
 ## Observacion {.flexbox .vcenter}
 
-TODO
+<div align="center">
+  <img src="images/agent-env-obs.png" width="90%">
+</div>
+
 
 ## Espacio de accion
 
+<img src="images/training-system.png" width="90%">
+
 $$
-\textbf{u}_{d} = \textbf{J}_{ee}^{T}(\textbf{q}) \textbf{M}_{\textbf{x}_{ee}}(\textbf{q}) [k_{p}(\textbf{x}_{d} - \textbf{x}) + k_v(\dot{\textbf{x}}_{d} - \dot{\textbf{x}})] + \textbf{g}(\textbf{q})
+\tau = \textbf{J}_{ee}^{T}(\textbf{q}) \textbf{M}_{\textbf{x}_{ee}}(\textbf{q}) [k_{p}(\delta_x) + k_v(\delta_{\dot{x}})] + \textbf{g}(\textbf{q})
 $$
 
-## Señal de recompensa
+## Señal de recompensa {.flexbox .vcenter}
 
 $$
 \begin{align*}
-r_{d} &= -{\lVert \textbf{x}_{ee} - \textbf{x}_d \lVert}_2 \\\\
-r_{r} &= -{\lVert \mathcal{H}(\textbf{q}_d, \textbf{q}^{*}_{ee}) \lVert}_2 \\\\
-r_{c} &= -{\lVert \textbf{a} \lVert}^{2}_2 \\
-R &= \begin{bmatrix}\alpha && \beta && \gamma\end{bmatrix}
-        \begin{bmatrix}r_d \\ r_o \\ r_c\end{bmatrix}
+\text{Distancia} \rightarrow R_{d} &= -{\lVert \textbf{x}_{ee} - \textbf{x}_d \lVert}_2 \\\\
+\text{Orientación} \rightarrow R_{o} &= -{\lVert \mathcal{H}(\textbf{q}_d, \textbf{q}^{*}_{ee}) \lVert}_2 \\\\
+\text{Regularización} \rightarrow R_{c} &= -{\lVert \textbf{a} \lVert}^{2}_2 \\\\
+\text{Recompensa final} \rightarrow R &= \alpha R_d + \beta R_o + \gamma R_c
 \end{align*}
 $$
 
