@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Introducción
 
-## Motivacion {.flexbox .vcenter}
+## Motivación {.flexbox .vcenter}
 
 <div class="columns-2">
   <video width="100%" autoplay loop>
@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = FALSE)
   <div align="center">
   Silver, David, et al. "Mastering the game of go without human knowledge." (2017).
   </div>
-  
+ 
   <video width="100%" autoplay loop>
   <source src="videos/openai_five_dota_final.m4v" type="video/mp4"/>
   </video>
@@ -36,11 +36,11 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Aprendizaje por refuerzo {.flexbox .vcenter}
 
 <div align="center">
-  ![](images/rl-model.png)
+  <img src="images/rl-model.png" width="100%">
 </div>
 
 
-## DRL aplicado a la robotica {.flexbox .vcenter}
+## DRL aplicado a la robótica {.flexbox .vcenter}
 
 <div class="columns-2">
   <video width="100%" autoplay loop>
@@ -49,7 +49,7 @@ knitr::opts_chunk$set(echo = FALSE)
   <div align="center">
   Andrychowicz, OpenAI: Marcin, et al. "Learning dexterous in-hand manipulation." (2020).
   </div>
-  
+ 
   <video width="100%" autoplay loop>
   <source src="videos/shadow_rubik_normal.m4v" type="video/mp4"/>
   </video>
@@ -66,43 +66,54 @@ knitr::opts_chunk$set(echo = FALSE)
   <ul>
   <li>Ineficiencia de muestreo</li>
   <li>Riesgo de seguridad</li>
-  <li>Es dificil reiniciar el entorno</li>
+  <li>Es difícil reiniciar el entorno</li>
   </ul>
-  
+ 
   <img src="images/robot-safety-zone.jpg" width="100%">
 </div>
 
-## Aprendiendo en simulacion {.flexbox .vcenter}
+## Aprendiendo en simulación {.flexbox .vcenter}
 
 <div class="columns-2">
   <video width="100%" autoplay loop>
   <source src="videos/openai_rubik.m4v" type="video/mp4"/>
   </video>
-  
+ 
   <img src="images/open-rubik-overview.jpg" width="100%">
 </div>
 
-## Tiempo de entrenamiento en DRL en simulacion {.flexbox .vcenter}
+## Tiempo de entrenamiento en DRL en simulación {.flexbox .vcenter}
 
 <div align="center">
   <img src="images/training-time.png" width="90%">
 </div>
 
+---
+
+<div class="columns-2">
+  "Learning dexterous in-hand manipulation" de OpenAI requirió de lo siguiente:
+  
+  - **Simulador**: MuJoCo
+  - **Recursos (CPU)**: 6144 núcleos de CPU
+  - **Recursos (GPU)**: 8 Nvidea V100 $\approx$ 896 teraFLOPS
+  - **Entrenamiento**: 40 hrs
+  - **Costo**: $ 7418.88 USD
+ 
+  <video width="100%" autoplay loop>
+  <source src="videos/shadow_hand_block.mp4" type="video/mp4"/>
+  </video>
+</div>
+
+
 ## Estado del arte {.flexbox .vcenter}
 
-+-----------+---------+----------------+---------+---------+---------+-----------+
-| Simulator | Physics | Photorealistic | DR      | ROS     | GPU     | Multi-GPU |
-+===========+:=======:+:==============:+:=======:+:=======:+:=======:+:=========:+
-| Gazebo    | ✅       | ❌              | ❌       | ✅       | ✅       | ❌         |
-+-----------+---------+----------------+---------+---------+---------+-----------+
-| Pybullet  | ✅       | ❌              | ❌       | ❌       | ✅       | ❌         |
-+-----------+---------+----------------+---------+---------+---------+-----------+
-| MuJoCo    | ✅       | ❌              | ❌       | ❌       | ❌       | ❌         |
-+-----------+---------+----------------+---------+---------+---------+-----------+
-| Unity     | ❌       | ✅              | ❌       | ❌       | ✅       | ❌         |
-+-----------+---------+----------------+---------+---------+---------+-----------+
-| Isaac Sim | ✅       | ✅              | ✅       | ✅       | ✅       | ✅         |
-+-----------+---------+----------------+---------+---------+---------+-----------+
+| Simulador | Física | Fotorrealista | DR  | ROS | GPU | Multi-GPU |
+|-----------|:------:|:-------------:|:---:|:---:|:---:|:---------:|
+| Gazebo	|   ✅   |  	❌   	| ❌  | ✅  | ✅  |	❌ 	|
+| Pybullet  |   ✅   |  	❌   	| ❌  | ❌  | ✅  |	❌ 	|
+| MuJoCo	|   ✅   |  	❌   	| ❌  | ❌  | ❌  |	❌ 	|
+| Unity 	|   ❌   |  	✅   	| ❌  | ❌  | ✅  |	❌ 	|
+| IsaacSim  |   ✅   |  	✅   	| ✅  | ✅  | ✅  |	✅ 	|
 
 ## Isaac Gym {.flexbox .vcenter}
 
@@ -137,14 +148,14 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Aplicaciones {.flexbox .vcenter}
 
 <div class="columns-2">
-  Aplicación directa de las politicas a la automatización de procesos industriales con robots:<br><br>
+  Aplicación directa de las políticas a la automatización de procesos industriales con robots:<br><br>
   <ul>
   <li>Soldadura</li>
   <li>Pintura</li>
   <li>Aplicación de aditivos</li>
   <li>Manufactura aditiva</li>
   </ul>
-  
+ 
   <img src="images/welding-robot.jpg" width="80%">
   <img src="images/painting-robot.jpg" width="80%">
 </div>
@@ -160,9 +171,72 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Generador de datos sintéticos de entrenamiento {.flexbox .vcenter}
 
+<div class="columns-2">
+$$
+\mathbf{C}(u) = \sum_{i=0}^{i<n} N_{i,p}(u) \mathbf{P}_{i}
+$$
+
+$$
+\begin{split}
+N_{i, p}(u) = \frac{u-u_{i}}{u_{i+p}-u_{i}} N_{i,p-1}(u) + \cdots \\  \frac{u_{i+p+1}-u}{u_{i+p+1}-u_{i+1}} N_{i+1, p-1}(u)
+\end{split}
+$$
+
+$$
+N_{i, 0}(u)=\left\{\begin{array}{cc}
+        1 & \text { si } u_{i} \leq u<u_{i+1} \\
+        0 & \text { si no }
+    \end{array}\right.
+$$
+
+<img src="images/bspline.png" width="100%">
+</div>
+
+## Mapeo de la trayectoria 2D a 3D
+
+<div class="columns-2">
+$$
+\begin{align*} 
+\textbf{p}_{uv} &= -\begin{bmatrix}
+        2 \pi s + \pi \\
+        \pi t + \frac{\pi}{2}
+    \end{bmatrix} \\\\
+\textbf{p}_{xyz} &= r \begin{bmatrix} 
+        \cos{(v)} \cos{(u)} \\
+        \cos{(v)} \sin{(u)} \\
+        \sin{(v)}
+    \end{bmatrix} \\\\
+\textbf{n} &= \begin{bmatrix} \sin{(u)} \cos{(v)} \\ \sin{(v)} \sin{(u)} \\ \cos{(u)} \end{bmatrix}
+\end{align*}
+$$
+
+<img src="images/spherical-coord.png" width="100%">
+</div>
+
+
+## Observacion {.flexbox .vcenter}
+
 TODO
 
-## Aprendizaje por refuerzo {.flexbox .vcenter}
+## Espacio de accion
+
+$$
+\textbf{u}_{d} = \textbf{J}_{ee}^{T}(\textbf{q}) \textbf{M}_{\textbf{x}_{ee}}(\textbf{q}) [k_{p}(\textbf{x}_{d} - \textbf{x}) + k_v(\dot{\textbf{x}}_{d} - \dot{\textbf{x}})] + \textbf{g}(\textbf{q})
+$$
+
+## Señal de recompensa
+
+$$
+\begin{align*}
+r_{d} &= -{\lVert \textbf{x}_{ee} - \textbf{x}_d \lVert}_2 \\\\
+r_{r} &= -{\lVert \mathcal{H}(\textbf{q}_d, \textbf{q}^{*}_{ee}) \lVert}_2 \\\\
+r_{c} &= -{\lVert \textbf{a} \lVert}^{2}_2 \\
+R &= \begin{bmatrix}\alpha && \beta && \gamma\end{bmatrix}
+        \begin{bmatrix}r_d \\ r_o \\ r_c\end{bmatrix}
+\end{align*}
+$$
+
+## Algoritmo de entrenamiento {.flexbox .vcenter}
 
 TODO
 
@@ -172,13 +246,9 @@ TODO
   <img src="images/nn-arch.png" width="90%">
 </div>
 
-## Algoritmo de entrenamiento {.flexbox .vcenter}
-
-TODO
-
 # Resultados
 
-## Desempeno de la politica {.flexbox .vcenter}
+## Desempeño de la política {.flexbox .vcenter}
 
 <div align="center">
   <img src="images/results-error.png" width="80%">
@@ -202,13 +272,13 @@ TODO
 
 ## Conclusiones {.flexbox .vcenter}
 
-- Este trabajo propone metodología para resolver el problema de seguimiento de trayectoria en superficies tridimensionales de forma end-to-end, mediante una combinación de algoritmos de DRL y tecnicas de control tradicionales.
-- La política generada tiene una tasa de éxito del 96% y un error en la posición de $\pm$ 0.01 metros.
-- Se logro reducir en 30% el tiempo de entrenamiento mediante la paralelizacion de 512 ambiente en una sola GPU Nvidia 3070.
+- Este trabajo propone metodología para resolver el problema de seguimiento de trayectoria en superficies tridimensionales de forma end-to-end, mediante una combinación de algoritmos de DRL y técnicas de control tradicionales.
+- La política generada tiene una tasa de éxito del **96%** y un error en la posición de **$\pm$ 0.01** metros.
+- Se logró reducir en **30%** el tiempo de entrenamiento mediante la paralelización de 512 ambientes en una sola GPU Nvidia 3070.
 - Este trabajo es pionero en resolver tareas de manipulación guiadas con visión en la plataforma de investigación de RL de Isaac Gym y podría habilitar el desarrollo de trabajos futuros en el área de DRL y visión por computadora.
 
 ## Trabajo futuro {.flexbox .vcenter}
 
-- Ampliar el estudio a otros agentes manipuladores y el desarrollo de políticas de control generalizadas. 
-- Transferir la politica aprendida en simulacion a agentes reales (i.e., sim2real) mendiante el uso de tecnicas de Domain Randomization.
+- Ampliar el estudio a otros agentes manipuladores y el desarrollo de políticas de control generalizadas.
+- Transferir la política aprendida en simulación a agentes reales (i.e., sim2real) mediante el uso de técnicas de Domain Randomization.
 - Ampliar el alcance de la tarea a cualquier objeto 3D arbitrario.
