@@ -36,13 +36,13 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Aprendizaje por refuerzo (RL) {.flexbox .vcenter}
 
 <div align="center">
-  <img src="images/rl-model.png" width="100%">
+  <img src="images/rl-model.png" width="80%">
 </div>
 
 ## Aprendizaje por refuerzo profundo (DRL) {.flexbox .vcenter}
 
 <div align="center">
-  <img src="images/rl-algos.png" width="100%">
+  <img src="images/rl-algos.png" width="90%">
 </div>
 
 ## DRL aplicado a la robótica {.flexbox .vcenter}
@@ -219,14 +219,14 @@ $$
 </div>
 
 
-## Observacion {.flexbox .vcenter}
+## Observación {.flexbox .vcenter}
 
 <div align="center">
   <img src="images/agent-env-obs.png" width="90%">
 </div>
 
 
-## Espacio de accion
+## Espacio de acción
 
 <img src="images/training-system.png" width="90%">
 
@@ -245,9 +245,32 @@ $$
 \end{align*}
 $$
 
-## Algoritmo de entrenamiento {.flexbox .vcenter}
+## Algoritmo de entrenamiento (PPO-Clip)
 
-TODO
+PPO-Clip actualiza la política con:
+$$
+\theta_{k+1} = \underset{\theta}{\mathrm{arg \space max}} \space \mathrm{E} \space \left[ L(s, a, \theta_k, \theta) \right]
+$$
+
+Función objetivo:
+$$
+L(s, a, \theta_k, \theta) = \min{\left( \frac{\pi_{\theta}(a|s)}{\pi_{\theta_{k}}(a|s)} A^{\pi_{\theta_{k}}}(s,a), \space\space g(\epsilon, A^{\pi_{\theta_{k}}}(s,a)) \right)}
+$$
+
+Donde:
+$$
+ g(\epsilon, A) = \left\{\begin{array}{cc}
+        (1 + \epsilon)A & \text { si } A \geq 0 \\
+        (1 - \epsilon)A & \text { si } A < 0
+    \end{array}\right.
+$$
+
+---
+
+<div align="center">
+  <img src="images/ppo-clip-algo.png" width="90%">
+</div>
+
 
 ## Arquitectura de red neuronal {.flexbox .vcenter}
  
@@ -259,22 +282,38 @@ TODO
 
 ## Desempeño de la política {.flexbox .vcenter}
 
-<div align="center">
-  <img src="images/results-error.png" width="80%">
+<div style="width: 100%; overflow: hidden;" align="center">
+  <div style="width: 40%; float: left;">
+  | Métrica                 |     Promedio      | Mediana |
+  |-------------------------|:-----------------:|:-------:|
+  | Error en posición (mts) | $0.01 \pm 0.0003$ | $0.011$ |
+  | Error en orientación    | $0.08 \pm 0.001$  | $0.089$ |
+  </div>
+  <div style="margin-left: 42%;">
+  <img src="images/results-error.png" width="100%">
+  </div>
 </div>
+
 
 ## Resultados de entrenamiento {.flexbox .vcenter}
 
 <div align="center">
-  <img src="images/results-envs.png" width="90%">
+  <img src="images/results-envs.png" width="85%">
 </div>
 
 ## Demo {.flexbox .vcenter}
 
-<div align="center">
-  <video width="75%" autoplay loop>
+<div style="width: 100%; overflow: hidden;" align="center">
+  <div style="width: 72%; float: left;">
+  <video width="100%" autoplay loop>
   <source src="videos/best-policy-demo-full.m4v" type="video/mp4">
   </video>
+  </div>
+  <div style="margin-left: 75%;">
+  <img src="images/sample-01.gif" width="65%">
+  <img src="images/sample-02.gif" width="65%">
+  <img src="images/sample-03.gif" width="65%">
+  </div>
 </div>
 
 # Conclusiones y trabajo futuro

@@ -64,9 +64,9 @@ slides > slide.dark {
 }
 
 /* disable slide numbers */
-slides > slide:not(.nobackground):after {
+/*slides > slide:not(.nobackground):after {
     content: '';
-}
+}*/
 
 /* uncomment for blue bold
 b {
