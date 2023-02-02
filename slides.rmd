@@ -13,6 +13,18 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## Agenda
+
+* Introducción
+  - Planteamiento del problema
+  - Estado del arte
+  - Hipótesis
+  - Objetivos
+  - Contribución y aplicaciones
+* Metodología
+* Resultados
+* Conclusiones y trabajo futuro
+
 # Introducción
 
 ## Motivación {.flexbox .vcenter}
@@ -22,7 +34,7 @@ knitr::opts_chunk$set(echo = FALSE)
   <source src="videos/alphazero_2017_final.m4v" type="video/mp4"/>
   </video>
   <div align="center">
-  Silver, David, et al. "Mastering the game of go without human knowledge." (2017).
+  Silver, David, et al. "Mastering chess and shogi by self-play with a general reinforcement learning algorithm." (2017).
   </div>
  
   <video width="100%" autoplay loop>
@@ -127,11 +139,33 @@ knitr::opts_chunk$set(echo = FALSE)
   <source src="videos/isaac-gym-demo-01.m4v" type="video/mp4"/>
   </video>
   <video width="100%" autoplay loop>
-  <source src="videos/isaac-gym-demo-03.m4v" type="video/mp4"/>
+  <source src="videos/isaac-gym-demo-02.m4v" type="video/mp4"/>
   </video>
 
   <img src="images/rl-compute-time-comparative.png" width="100%">
+
+
+## Learning Dexterity (OpenAI) con Isaac Gym {.flexbox .vcenter}
+
+<div class="columns-2">
++------------+------------------------------------------+------------+------------+
+| Simulador  | Poder de cómputo                         | Tiempo     | Costo      |
+|            |                                          |            |            |
+|            | (CPU + GPUs)                             | (HRS)      | (USD)      |
++============+:========================================:+:==========:+:==========:+
+| MuJoCo     | 6144 nucleos de CPU + 8 GPUs Nvidea V100 | 40         | 7,4188.88  |
++------------+------------------------------------------+------------+------------+
+| Isaac Gym  | 320 nucleos de CPU + 1 GPU Nvidea A100   | 2          | 4.73       |
++------------+------------------------------------------+------------+------------+
+
+<video width="100%" autoplay loop>
+<source src="videos/isaac-gym-demo-03.m4v" type="video/mp4"/>
+</video>
+<div align="center">
+Makoviychuk, Viktor, et al. "Isaac gym: High performance gpu-based physics simulation for robot learning." (2021).
 </div>
+</div>
+
 
 ## Hipótesis {.flexbox .vcenter}
 
@@ -146,7 +180,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Contribución del proyecto {.flexbox .vcenter}
 
 1. Desarrollo de una metodología de entrenamiento de modelos de DRL para resolver tareas de seguimiento de trayectorias en superficies tridimensionales de forma end-to-end.
-2. Una política capaz de inferir de la fuerza aplicada a los motores a partir de solo las imágenes de un sensor RGBD ubicado en el efector final del robot.
+2. Una política capaz de inferir la fuerza aplicada a los actuadores de un robot a partir de las imágenes de un sensor RGBD ubicado en el efector final.
 4. Proposición de una arquitectura de entrenamiento que implementa un simulador robótico de vanguardia y un framework de DL de alto rendimiento de manera eficiente.
 5. Reducción del tiempo y los recursos computacionales requeridos para el entrenamiento de modelos de DRL.
 
@@ -171,7 +205,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Arquitectura del sistema de aprendizaje {.flexbox .vcenter}
 
 <div align="center">
-  <img src="images/system-design.jpg" width="90%">
+  <img src="images/learning-platform.png" width="90%">
 </div>
 
 ## Generador de datos sintéticos de entrenamiento {.flexbox .vcenter}
@@ -330,3 +364,7 @@ $$
 - Ampliar el estudio a otros agentes manipuladores y el desarrollo de políticas de control generalizadas.
 - Transferir la política aprendida en simulación a agentes reales (i.e., sim2real) mediante el uso de técnicas de Domain Randomization.
 - Ampliar el alcance de la tarea a cualquier objeto 3D arbitrario.
+
+## {data-background=images/learning-platform-alpha.png data-background-size=90% .flexbox .vcenter}
+
+<h1>Gracias por su atención.</h1>
