@@ -16,12 +16,14 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Agenda
 
 * Introducción
+  - Motivación
   - Planteamiento del problema
   - Estado del arte
-  - Hipótesis
-  - Objetivos
+  - Hipótesis y objetivos
   - Contribución y aplicaciones
-* Metodología
+* Metodología propuesta
+  - Descripción la metodología de entrenamiento
+  - Enfoque para resolver la tarea
 * Resultados
 * Conclusiones y trabajo futuro
 
@@ -64,7 +66,7 @@ knitr::opts_chunk$set(echo = FALSE)
   <source src="videos/shadow_hand_real_block_final.m4v" type="video/mp4"/>
   </video>
   <div align="center">
-  Andrychowicz, OpenAI: Marcin, et al. "Learning dexterous in-hand manipulation." (2020).
+  Andrychowicz, OpenAI: Marcin, et al. "Learning dexterous in-hand manipulation." (2018).
   </div>
  
   <video width="100%" autoplay loop>
@@ -130,7 +132,7 @@ knitr::opts_chunk$set(echo = FALSE)
 | Pybullet  |   ✅   |  	❌   	| ❌  | ❌  | ✅  |	❌ 	|
 | MuJoCo	|   ✅   |  	❌   	| ❌  | ❌  | ❌  |	❌ 	|
 | Unity 	|   ❌   |  	✅   	| ❌  | ❌  | ✅  |	❌ 	|
-| IsaacSim  |   ✅   |  	✅   	| ✅  | ✅  | ✅  |	✅ 	|
+| Isaac Gym |   ✅   |  	✅   	| ✅  | ✅  | ✅  |	✅ 	|
 
 ## Isaac Gym {.flexbox .vcenter}
 
@@ -175,7 +177,7 @@ Makoviychuk, Viktor, et al. "Isaac gym: High performance gpu-based physics simul
 
 - Realizar una comparación entre los simuladores robóticos y un estudio de compatibilidad con los frameworks de ML.
 - Proponer una arquitectura experimental que permita generar las observaciones necesarias para el entrenamiento de un agente que permita resolver la tarea asignada.
-- Hacer una comparación del rendimiento de entrenamiento, utilizando la metodología propuesta, variando los parámetros de simulación para la tarea propuesta.
+- Hacer una comparación del rendimiento de entrenamiento, utilizando la metodología propuesta, variando los parámetros de simulación.
 
 ## Contribución del proyecto {.flexbox .vcenter}
 
@@ -208,6 +210,12 @@ Makoviychuk, Viktor, et al. "Isaac gym: High performance gpu-based physics simul
   <img src="images/learning-platform.png" width="90%">
 </div>
 
+## Observación {.flexbox .vcenter}
+
+<div align="center">
+  <img src="images/agent-env-obs.png" width="90%">
+</div>
+
 ## Generador de datos sintéticos de entrenamiento {.flexbox .vcenter}
 
 <div class="columns-2">
@@ -216,16 +224,16 @@ $$
 $$
 
 $$
-\begin{split}
-N_{i, p}(u) = \frac{u-u_{i}}{u_{i+p}-u_{i}} N_{i,p-1}(u) + \cdots \\  \frac{u_{i+p+1}-u}{u_{i+p+1}-u_{i+1}} N_{i+1, p-1}(u)
-\end{split}
-$$
-
-$$
 N_{i, 0}(u)=\left\{\begin{array}{cc}
         1 & \text { si } u_{i} \leq u<u_{i+1} \\
         0 & \text { si no }
     \end{array}\right.
+$$
+
+$$
+\begin{split}
+N_{i, p}(u) = \frac{u-u_{i}}{u_{i+p}-u_{i}} N_{i,p-1}(u) + \cdots \\  \frac{u_{i+p+1}-u}{u_{i+p+1}-u_{i+1}} N_{i+1, p-1}(u)
+\end{split}
 $$
 
 <img src="images/bspline.png" width="100%">
@@ -252,13 +260,11 @@ $$
 <img src="images/spherical-coord.png" width="100%">
 </div>
 
-
-## Observación {.flexbox .vcenter}
+## Domain Randomization {.flexbox .vcenter}
 
 <div align="center">
-  <img src="images/agent-env-obs.png" width="90%">
+  <img src="images/random-props.png" width="90%">
 </div>
-
 
 ## Espacio de acción
 
@@ -279,11 +285,17 @@ $$
 \end{align*}
 $$
 
+## Arquitectura de red neuronal {.flexbox .vcenter}
+ 
+<div align="center">
+  <img src="images/nn-arch.png" width="90%">
+</div>
+
 ## Algoritmo de entrenamiento (PPO-Clip)
 
 PPO-Clip actualiza la política con:
 $$
-\theta_{k+1} = \underset{\theta}{\mathrm{arg \space max}} \space \mathrm{E} \space \left[ L(s, a, \theta_k, \theta) \right]
+\theta_{k+1} = \underset{\theta}{\mathrm{arg \space max}} \space \underset{s,a \sim \pi_{\theta_{k}}}{\mathrm{E}} \space \left[ L(s, a, \theta_k, \theta) \right]
 $$
 
 Función objetivo:
@@ -305,14 +317,19 @@ $$
   <img src="images/ppo-clip-algo.png" width="90%">
 </div>
 
+# Resultados
 
-## Arquitectura de red neuronal {.flexbox .vcenter}
- 
+## Experimento: El efecto de $\lambda$ {.flexbox .vcenter}
+
 <div align="center">
-  <img src="images/nn-arch.png" width="90%">
+  <img src="images/exp-lambda.png" width="85%">
 </div>
 
-# Resultados
+## Experimento: N. de entornos paralelos {.flexbox .vcenter}
+
+<div align="center">
+  <img src="images/results-envs.png" width="85%">
+</div>
 
 ## Desempeño de la política {.flexbox .vcenter}
 
@@ -326,13 +343,6 @@ $$
   <div style="margin-left: 42%;">
   <img src="images/results-error.png" width="100%">
   </div>
-</div>
-
-
-## Resultados de entrenamiento {.flexbox .vcenter}
-
-<div align="center">
-  <img src="images/results-envs.png" width="85%">
 </div>
 
 ## Demo {.flexbox .vcenter}
